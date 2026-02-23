@@ -1,0 +1,22 @@
+# Environment
+.env
+venv/
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

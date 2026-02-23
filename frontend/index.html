@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Shape Diagnostic — Koher</title>
+    <meta name="description" content="Understand the experiential shape of your game. Select three qualities that define your game's feel.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Play Shape Diagnostic — Koher">
+    <meta property="og:description" content="Understand the experiential shape of your game. What do players feel?">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Play Shape Diagnostic — Koher">
+    <meta name="twitter:description" content="Understand the experiential shape of your game. What do players feel?">
+
+    <!-- PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Favicon - Teal theme -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 60 35 Q 100 65, 60 100 Q 20 135, 60 165' fill='none' stroke='%232dd4bf' stroke-width='18' stroke-linecap='round'/%3E%3Cpath d='M 100 35 Q 60 65, 100 100 Q 140 135, 100 165' fill='none' stroke='%235eead4' stroke-width='16' stroke-linecap='round'/%3E%3Cpath d='M 140 35 Q 100 65, 140 100 Q 180 135, 140 165' fill='none' stroke='%237da3a8' stroke-width='14' stroke-linecap='round' opacity='0.6'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-dark: #0d1f22;
+            --color-bg-card: #152a2e;
+            --color-bg-card-hover: #1a3337;
+            --color-text: #e8f0f0;
+            --color-text-muted: #7da3a8;
+            --color-accent: #2dd4bf;
+            --color-accent-light: #5eead4;
+            --color-highlight: #fb7185;
+            --color-border: #1e3a3f;
+            --color-selected: #2dd4bf;
+            --color-hover: rgba(45, 212, 191, 0.15);
+
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Source Serif 4', serif;
+            --font-ui: 'IBM Plex Sans', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg-dark);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            padding: var(--spacing-xl) var(--spacing-2xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .logo {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main {
+            padding: var(--spacing-2xl);
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Quality Grid */
+        .quality-section {
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (max-width: 1200px) {
+            .quality-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quality-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Quality Card */
+        .quality-card {
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .quality-card:hover {
+            background: var(--color-bg-card-hover);
+            border-color: var(--color-text-muted);
+        }
+
+        .quality-card.selected {
+            border-color: var(--color-selected);
+            background: var(--color-hover);
+        }
+
+        .quality-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            width: 24px;
+            height: 24px;
+            background: var(--color-accent);
+            color: var(--color-bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .quality-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            text-transform: capitalize;
+        }
+
+        .quality-description {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        /* Selection Counter */
+        .selection-counter {
+            text-align: center;
+            font-family: var(--font-ui);
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .selection-counter .count {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* Context Section */
+        .context-section {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-3xl);
+        }
+
+        .context-input {
+            width: 100%;
+            min-height: 120px;
+            padding: var(--spacing-lg);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--color-text);
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+
+        .context-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .context-input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .char-count-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--spacing-sm);
+        }
+
+        .char-count {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Generate Button */
+        .generate-section {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .generate-btn {
+            font-family: var(--font-ui);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: var(--spacing-md) var(--spacing-2xl);
+            background: var(--color-accent);
+            color: var(--color-bg-dark);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .generate-btn:hover:not(:disabled) {
+            background: var(--color-accent-light);
+            transform: translateY(-1px);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .generate-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .generate-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid var(--color-bg-dark);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+        }
+
+        .results-section.visible {
+            display: block;
+        }
+
+        /* Results Header */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .results-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+
+        .shape-badge {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--color-accent);
+            color: var(--color-bg-dark);
+            border-radius: 4px;
+        }
+
+        /* Selected Qualities Display */
+        .selected-qualities {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .selected-quality {
+            font-family: var(--font-ui);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            text-transform: capitalize;
+        }
+
+        /* Relationships */
+        .relationships-section {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .relationship-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .relationship-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .relationship-label {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .relationship-label.synergy {
+            color: var(--color-accent);
+        }
+
+        .relationship-label.tension {
+            color: var(--color-highlight);
+        }
+
+        .relationship-item {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            padding: var(--spacing-sm) 0;
+        }
+
+        .relationship-pair {
+            color: var(--color-text);
+            font-weight: 500;
+        }
+
+        .no-relationships {
+            color: var(--color-text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Narrative */
+        .narrative-section {
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .narrative-explanation {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .narrative-explanation strong {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .narrative-explanation em {
+            color: var(--color-highlight);
+            font-style: italic;
+        }
+
+        /* Implications */
+        .implications-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .implications-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .implications-list li {
+            position: relative;
+            padding-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .implications-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .implications-list li strong {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .implications-list li em {
+            color: var(--color-highlight);
+            font-style: italic;
+        }
+
+        /* Try Again Button */
+        .try-again-section {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            padding-top: var(--spacing-lg);
+        }
+
+        .try-again-btn,
+        .download-btn {
+            font-family: var(--font-ui);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: transparent;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .try-again-btn:hover,
+        .download-btn:hover {
+            color: var(--color-text);
+            border-color: var(--color-text-muted);
+        }
+
+        /* History Section */
+        .history-section {
+            max-width: 900px;
+            margin: var(--spacing-3xl) auto 0;
+            display: none;
+        }
+
+        .history-section.visible {
+            display: block;
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .history-title {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+        }
+
+        .history-item {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            opacity: 0.7;
+        }
+
+        .history-item:hover {
+            opacity: 1;
+            border-color: var(--color-text-muted);
+        }
+
+        .history-qualities {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        .history-quality {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            background: var(--color-bg-dark);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            text-transform: capitalize;
+        }
+
+        .history-shape {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+        }
+
+        .history-context {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-sm);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Context Header with Load Sample */
+        .context-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .context-header .section-header {
+            margin-bottom: 0;
+        }
+
+        .load-sample-btn {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: transparent;
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .load-sample-btn:hover {
+            background: var(--color-hover);
+        }
+
+        .load-sample-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sample-name {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-sm);
+            font-style: italic;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: rgba(251, 113, 133, 0.1);
+            border: 1px solid var(--color-highlight);
+            border-radius: 8px;
+            color: var(--color-highlight);
+            margin-bottom: var(--spacing-xl);
+            font-family: var(--font-ui);
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            border-top: 1px solid var(--color-border);
+            margin-top: var(--spacing-3xl);
+        }
+
+        .footer-text {
+            font-family: var(--font-ui);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .footer-link {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="header-top">
+                <a href="https://koher.app" class="logo">Koher</a>
+            </div>
+            <h1>What shape does your game take?</h1>
+            <p class="subtitle">Every game creates a constellation of feelings. Select the three qualities that most define your game's experiential shape. Not what players do — what players feel.</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Quality Selection -->
+        <section class="quality-section">
+            <h2 class="section-header">Select Three Qualities</h2>
+            <div class="quality-grid" id="qualityGrid">
+                <!-- Qualities will be rendered by JavaScript -->
+            </div>
+            <div class="selection-counter">
+                <span class="count" id="selectionCount">0</span> of 3 selected
+            </div>
+        </section>
+
+        <!-- Context Input -->
+        <section class="context-section">
+            <div class="context-header">
+                <h2 class="section-header">Describe Your Game</h2>
+                <button class="load-sample-btn" id="loadSampleBtn">Load Sample</button>
+            </div>
+            <textarea
+                class="context-input"
+                id="contextInput"
+                placeholder="Describe your game in a sentence or two. What is it? What do players do?"
+                maxlength="500"
+            ></textarea>
+            <div class="char-count-row">
+                <span id="sampleName" class="sample-name"></span>
+                <span class="char-count"><span id="charCount">0</span> / 500</span>
+            </div>
+        </section>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage"></div>
+
+        <!-- Generate Button -->
+        <section class="generate-section">
+            <button class="generate-btn" id="generateBtn" disabled>Reveal Play Shape</button>
+        </section>
+
+        <!-- Results -->
+        <section class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2 class="results-title">Your Play Shape</h2>
+                <span class="shape-badge" id="shapeBadge">—</span>
+            </div>
+
+            <div class="selected-qualities" id="selectedQualitiesDisplay"></div>
+
+            <div class="relationships-section">
+                <h3 class="section-header">Relationships</h3>
+                <div id="relationshipsDisplay"></div>
+            </div>
+
+            <div class="narrative-section">
+                <h3 class="section-header">What This Means For Your Game</h3>
+                <p class="narrative-explanation" id="narrativeExplanation"></p>
+            </div>
+
+            <div class="implications-section">
+                <h3 class="section-header">Design Implications</h3>
+                <ul class="implications-list" id="implicationsList"></ul>
+            </div>
+
+            <div class="try-again-section">
+                <button class="try-again-btn" id="tryAgainBtn">Try Another Shape</button>
+                <button class="download-btn" id="downloadBtn">Download Transcript</button>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section class="history-section" id="historySection">
+            <div class="history-header">
+                <span class="history-title">Previous Analyses</span>
+            </div>
+            <div id="historyContainer">
+                <!-- History items injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-text">
+            Play Shape Diagnostic is part of <a href="https://koher.app" class="footer-link">Koher</a> —
+            tools for design thinking.
+        </p>
+    </footer>
+
+    <script>
+        // Configuration
+        const API_BASE = window.location.origin;
+
+        // Markdown parser for bold and italic
+        function parseMarkdown(text) {
+            if (!text) return '';
+            return text
+                // Bold: **text** → <strong>text</strong>
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                // Italic at start of sentence/clause (after . : or —): add line breaks
+                .replace(/(^|\. |: |—)\*([^*]+)\*/g, '$1<br><br><em>$2</em>')
+                // Italic mid-sentence: no line breaks
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        }
+
+        // Quality definitions
+        const QUALITIES = [
+            { name: "anticipation", description: "Waiting for something to happen — the held breath before the reveal" },
+            { name: "presence", description: "Being fully absorbed in the moment — flow state, immersion" },
+            { name: "yearning", description: "Longing for something distant — nostalgia, desire, unreachable goals" },
+            { name: "tension", description: "Uncertainty about what comes next — suspense, unease" },
+            { name: "dread", description: "Fear of what lurks ahead — horror, impending threat" },
+            { name: "relief", description: "Release from pressure — the exhale after danger passes" },
+            { name: "mischief", description: "Playful rule-breaking — cleverness, pranks, subversion" },
+            { name: "discovery", description: "Finding something new — exploration, revelation, wonder" },
+            { name: "mastery", description: "Growing skill and competence — the satisfaction of getting better" },
+            { name: "belonging", description: "Connection to others or place — community, home, togetherness" },
+            { name: "transgression", description: "Crossing boundaries — taboo, forbidden action, moral ambiguity" },
+            { name: "triumph", description: "Victory and accomplishment — winning, overcoming, celebration" },
+        ];
+
+        // State
+        let selectedQualities = [];
+        let lastAnalysisResult = null;
+
+        // History
+        const HISTORY_KEY = 'playshape_history';
+        let history = [];
+
+        // Load history from localStorage
+        function loadHistory() {
+            try {
+                const stored = localStorage.getItem(HISTORY_KEY);
+                if (stored) {
+                    history = JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error('Failed to load history:', e);
+                history = [];
+            }
+        }
+
+        // Save history to localStorage
+        function saveHistory() {
+            try {
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+            } catch (e) {
+                console.error('Failed to save history:', e);
+            }
+        }
+
+        // Add analysis to history
+        function addToHistory(result) {
+            const entry = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                qualities: result.qualities,
+                context: result.context || contextInput.value.trim(),
+                shape: result.shape.classification,
+                narrative: result.narrative
+            };
+
+            // Add to beginning of array
+            history.unshift(entry);
+
+            // Keep only last 20 entries
+            if (history.length > 20) {
+                history = history.slice(0, 20);
+            }
+
+            saveHistory();
+            renderHistory();
+        }
+
+        // Render history section
+        function renderHistory() {
+            const container = document.getElementById('historyContainer');
+            const section = document.getElementById('historySection');
+
+            if (history.length === 0) {
+                section.classList.remove('visible');
+                return;
+            }
+
+            section.classList.add('visible');
+
+            container.innerHTML = history.map(entry => `
+                <div class="history-item" data-id="${entry.id}">
+                    <div class="history-qualities">
+                        ${entry.qualities.map(q => `<span class="history-quality">${q}</span>`).join('')}
+                    </div>
+                    <div class="history-shape">${entry.shape}</div>
+                    ${entry.context ? `<div class="history-context">${entry.context}</div>` : ''}
+                </div>
+            `).join('');
+
+            // Add click handlers to history items
+            container.querySelectorAll('.history-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const id = parseInt(item.dataset.id);
+                    const entry = history.find(h => h.id === id);
+                    if (entry) {
+                        displayHistoryEntry(entry);
+                    }
+                });
+            });
+        }
+
+        // Display a history entry
+        function displayHistoryEntry(entry) {
+            // Set the qualities
+            selectedQualities = [...entry.qualities];
+
+            // Set the context
+            contextInput.value = entry.context || '';
+            charCount.textContent = contextInput.value.length;
+            sampleNameDisplay.textContent = '';
+
+            // Construct a result object to display
+            const result = {
+                qualities: entry.qualities,
+                shape: { classification: entry.shape },
+                relationships: { synergies: [], tensions: [] },
+                narrative: entry.narrative
+            };
+
+            // Update UI and display results
+            updateUI();
+            displayResults(result, false); // false = don't add to history again
+        }
+
+        // Download transcript as PDF
+        function downloadTranscript() {
+            if (!lastAnalysisResult) return;
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+            const maxWidth = pageWidth - (margin * 2);
+            let y = margin;
+
+            // Helper to add text with word wrap
+            function addText(text, fontSize, isBold = false, color = [35, 45, 50]) {
+                doc.setFontSize(fontSize);
+                doc.setFont('helvetica', isBold ? 'bold' : 'normal');
+                doc.setTextColor(...color);
+
+                // Strip markdown formatting for PDF
+                const cleanText = text
+                    .replace(/\*\*([^*]+)\*\*/g, '$1')
+                    .replace(/\*([^*]+)\*/g, '$1');
+
+                const lines = doc.splitTextToSize(cleanText, maxWidth);
+                lines.forEach(line => {
+                    if (y > 270) {
+                        doc.addPage();
+                        y = margin;
+                    }
+                    doc.text(line, margin, y);
+                    y += fontSize * 0.5;
+                });
+                y += 3;
+            }
+
+            // Title
+            addText('Play Shape Diagnostic', 18, true, [45, 212, 191]);
+            y += 2;
+
+            // Date
+            const date = new Date().toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            addText(date, 10, false, [120, 140, 145]);
+            y += 5;
+
+            // Shape classification
+            addText(`Shape: ${lastAnalysisResult.shape.classification.toUpperCase()}`, 14, true);
+            y += 3;
+
+            // Qualities
+            addText(`Qualities: ${lastAnalysisResult.qualities.join(', ')}`, 11, false);
+            y += 5;
+
+            // Context
+            if (contextInput.value.trim()) {
+                addText('Game Description:', 11, true);
+                addText(contextInput.value.trim(), 10, false, [80, 90, 95]);
+                y += 5;
+            }
+
+            // Relationships
+            const synergies = lastAnalysisResult.relationships?.synergies || [];
+            const tensions = lastAnalysisResult.relationships?.tensions || [];
+
+            if (synergies.length > 0 || tensions.length > 0) {
+                addText('Relationships:', 11, true);
+                y += 2;
+
+                synergies.forEach(s => {
+                    addText(`  Synergy: ${s.pair[0]} ↔ ${s.pair[1]}`, 10, false, [45, 180, 160]);
+                    addText(`  ${s.description}`, 9, false, [100, 110, 115]);
+                });
+
+                tensions.forEach(t => {
+                    addText(`  Tension: ${t.pair[0]} ↔ ${t.pair[1]}`, 10, false, [251, 113, 133]);
+                    addText(`  ${t.description}`, 9, false, [100, 110, 115]);
+                });
+                y += 3;
+            }
+
+            // Narrative
+            if (lastAnalysisResult.narrative?.explanation) {
+                addText('Narrative:', 11, true);
+                addText(lastAnalysisResult.narrative.explanation, 10, false);
+                y += 3;
+            }
+
+            // Implications
+            if (lastAnalysisResult.narrative?.implications?.length > 0) {
+                addText('Design Implications:', 11, true);
+                lastAnalysisResult.narrative.implications.forEach(imp => {
+                    addText(`→ ${imp}`, 10, false);
+                });
+            }
+
+            // Footer
+            y = 285;
+            doc.setFontSize(8);
+            doc.setTextColor(120, 140, 145);
+            doc.text('Generated by Play Shape Diagnostic — koher.app', margin, y);
+
+            // Save
+            const filename = `playshape-${lastAnalysisResult.qualities.join('-')}-${Date.now()}.pdf`;
+            doc.save(filename);
+        }
+
+        // DOM Elements
+        const qualityGrid = document.getElementById('qualityGrid');
+        const selectionCount = document.getElementById('selectionCount');
+        const contextInput = document.getElementById('contextInput');
+        const charCount = document.getElementById('charCount');
+        const generateBtn = document.getElementById('generateBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const resultsSection = document.getElementById('resultsSection');
+        const tryAgainBtn = document.getElementById('tryAgainBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const loadSampleBtn = document.getElementById('loadSampleBtn');
+        const sampleNameDisplay = document.getElementById('sampleName');
+
+        // Render quality cards
+        function renderQualities() {
+            qualityGrid.innerHTML = QUALITIES.map(q => `
+                <div class="quality-card" data-quality="${q.name}">
+                    <div class="quality-name">${q.name}</div>
+                    <div class="quality-description">${q.description}</div>
+                </div>
+            `).join('');
+
+            // Add click handlers
+            document.querySelectorAll('.quality-card').forEach(card => {
+                card.addEventListener('click', () => toggleQuality(card.dataset.quality));
+            });
+        }
+
+        // Toggle quality selection
+        function toggleQuality(quality) {
+            const index = selectedQualities.indexOf(quality);
+
+            if (index === -1) {
+                // Add if less than 3 selected
+                if (selectedQualities.length < 3) {
+                    selectedQualities.push(quality);
+                }
+            } else {
+                // Remove if already selected
+                selectedQualities.splice(index, 1);
+            }
+
+            updateUI();
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Update selection count
+            selectionCount.textContent = selectedQualities.length;
+
+            // Update card states
+            document.querySelectorAll('.quality-card').forEach(card => {
+                const isSelected = selectedQualities.includes(card.dataset.quality);
+                card.classList.toggle('selected', isSelected);
+            });
+
+            // Update generate button
+            const contextLength = contextInput.value.length;
+            const isValid = selectedQualities.length === 3 && contextLength >= 20 && contextLength <= 500;
+            generateBtn.disabled = !isValid;
+        }
+
+        // Handle context input
+        contextInput.addEventListener('input', () => {
+            charCount.textContent = contextInput.value.length;
+            updateUI();
+        });
+
+        // Handle generate button
+        generateBtn.addEventListener('click', async () => {
+            if (generateBtn.disabled) return;
+
+            // Show loading state
+            generateBtn.classList.add('loading');
+            generateBtn.disabled = true;
+            errorMessage.classList.remove('visible');
+            resultsSection.classList.remove('visible');
+
+            try {
+                const response = await fetch('/api/analyse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        qualities: selectedQualities,
+                        context: contextInput.value.trim(),
+                    }),
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Analysis failed');
+                }
+
+                const data = await response.json();
+                displayResults(data);
+
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.classList.add('visible');
+            } finally {
+                generateBtn.classList.remove('loading');
+                updateUI();
+            }
+        });
+
+        // Display results
+        function displayResults(data, addToHistoryFlag = true) {
+            // Store result for PDF download
+            lastAnalysisResult = data;
+
+            // Add to history (unless displaying a history entry)
+            if (addToHistoryFlag) {
+                addToHistory(data);
+            }
+
+            // Shape badge
+            document.getElementById('shapeBadge').textContent = data.shape.classification;
+
+            // Selected qualities
+            document.getElementById('selectedQualitiesDisplay').innerHTML =
+                data.qualities.map(q => `<span class="selected-quality">${q}</span>`).join('');
+
+            // Relationships
+            const relationshipsHTML = [];
+
+            if (data.relationships.synergies.length > 0) {
+                relationshipsHTML.push(`
+                    <div class="relationship-group">
+                        <div class="relationship-label synergy">Synergies</div>
+                        ${data.relationships.synergies.map(s => `
+                            <div class="relationship-item">
+                                <span class="relationship-pair">${s.pair[0]} ↔ ${s.pair[1]}</span>:
+                                ${s.description}
+                            </div>
+                        `).join('')}
+                    </div>
+                `);
+            }
+
+            if (data.relationships.tensions.length > 0) {
+                relationshipsHTML.push(`
+                    <div class="relationship-group">
+                        <div class="relationship-label tension">Tensions</div>
+                        ${data.relationships.tensions.map(t => `
+                            <div class="relationship-item">
+                                <span class="relationship-pair">${t.pair[0]} ↔ ${t.pair[1]}</span>:
+                                ${t.description}
+                            </div>
+                        `).join('')}
+                    </div>
+                `);
+            }
+
+            if (relationshipsHTML.length === 0) {
+                relationshipsHTML.push('<p class="no-relationships">These qualities coexist independently — no strong synergies or tensions.</p>');
+            }
+
+            document.getElementById('relationshipsDisplay').innerHTML = relationshipsHTML.join('');
+
+            // Narrative (parse markdown for bold/italic)
+            document.getElementById('narrativeExplanation').innerHTML = parseMarkdown(data.narrative.explanation);
+
+            // Implications (parse markdown for bold/italic)
+            const implicationsList = document.getElementById('implicationsList');
+            if (data.narrative.implications.length > 0) {
+                implicationsList.innerHTML = data.narrative.implications
+                    .map(imp => `<li>${parseMarkdown(imp)}</li>`)
+                    .join('');
+            } else {
+                implicationsList.innerHTML = '<li>Consider how these qualities interact in your specific mechanics.</li>';
+            }
+
+            // Show results
+            resultsSection.classList.add('visible');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Handle try again
+        tryAgainBtn.addEventListener('click', () => {
+            selectedQualities = [];
+            contextInput.value = '';
+            charCount.textContent = '0';
+            sampleNameDisplay.textContent = '';
+            resultsSection.classList.remove('visible');
+            errorMessage.classList.remove('visible');
+            updateUI();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Handle download transcript
+        downloadBtn.addEventListener('click', downloadTranscript);
+
+        // Handle load sample
+        loadSampleBtn.addEventListener('click', async () => {
+            loadSampleBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/samples');
+                if (!response.ok) throw new Error('Failed to load sample');
+
+                const data = await response.json();
+                const sample = data.random_pick;
+
+                // Clear current selection
+                selectedQualities = [];
+
+                // Select the sample's qualities
+                sample.qualities.forEach(q => {
+                    if (selectedQualities.length < 3) {
+                        selectedQualities.push(q);
+                    }
+                });
+
+                // Fill in the context
+                contextInput.value = sample.context;
+                charCount.textContent = sample.context.length;
+
+                // Show sample name
+                sampleNameDisplay.textContent = `Sample: ${sample.name}`;
+
+                // Clear any previous results/errors
+                resultsSection.classList.remove('visible');
+                errorMessage.classList.remove('visible');
+
+                // Update UI
+                updateUI();
+
+            } catch (error) {
+                console.error('Failed to load sample:', error);
+                errorMessage.textContent = 'Failed to load sample. Try again.';
+                errorMessage.classList.add('visible');
+            } finally {
+                loadSampleBtn.disabled = false;
+            }
+        });
+
+        // Initialize
+        function init() {
+            // Load history from localStorage
+            loadHistory();
+
+            // Render qualities and history
+            renderQualities();
+            renderHistory();
+            updateUI();
+        }
+
+        init();
+    </script>
+</body>
+</html>

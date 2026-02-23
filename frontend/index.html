@@ -1000,12 +1000,12 @@
                 y += 2;
 
                 synergies.forEach(s => {
-                    addText(`  Synergy: ${s.pair[0]} ↔ ${s.pair[1]}`, 10, false, [45, 180, 160]);
+                    addText(`  Synergy: ${s.pair[0]} | ${s.pair[1]}`, 10, false, [45, 180, 160]);
                     addText(`  ${s.description}`, 9, false, [100, 110, 115]);
                 });
 
                 tensions.forEach(t => {
-                    addText(`  Tension: ${t.pair[0]} ↔ ${t.pair[1]}`, 10, false, [251, 113, 133]);
+                    addText(`  Tension: ${t.pair[0]} | ${t.pair[1]}`, 10, false, [251, 113, 133]);
                     addText(`  ${t.description}`, 9, false, [100, 110, 115]);
                 });
                 y += 3;
@@ -1022,7 +1022,7 @@
             if (lastAnalysisResult.narrative?.implications?.length > 0) {
                 addText('Design Implications:', 11, true);
                 lastAnalysisResult.narrative.implications.forEach(imp => {
-                    addText(`→ ${imp}`, 10, false);
+                    addText(`- ${imp}`, 10, false);
                 });
             }
 

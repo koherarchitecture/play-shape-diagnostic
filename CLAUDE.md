@@ -149,4 +149,35 @@ British English spellings (organise, colour, centre).
 
 ---
 
+## Git Repository
+
+**Repository:** https://github.com/koher-architecture/playshape
+
+**Git user configuration:**
+```bash
+git config user.name "Koher Architecture"
+git config user.email "hello@koher.app"
+```
+
+---
+
+## Commit Workflow
+
+**After every commit to this repository, update:**
+
+`COMMIT-STATUS.md` (local file, gitignored)
+
+This file tracks:
+- Latest push (commit hash, message, timestamp)
+- Pending local changes
+- Change log
+
+**Workflow:**
+1. Make changes
+2. Commit with descriptive message
+3. Push to GitHub
+4. Update `COMMIT-STATUS.md` with new commit details
+
+---
+
 *Open source release — no authentication, no analytics, no usage limits.*

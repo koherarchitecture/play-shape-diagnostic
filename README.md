@@ -1,5 +1,9 @@
 # Play Shape Diagnostic
 
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Python](https://img.shields.io/badge/python-3.11+-green)
+![Koher](https://img.shields.io/badge/koher-tool-fb7185)
+
 **Reveal the shape of your play experience.**
 
 Play Shape Diagnostic helps game designers and experience creators understand the experiential architecture of their concepts. Select 3 of 12 experiential qualities, describe your concept, and discover whether your design creates harmony, tension, paradox, or something more complex.

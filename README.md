@@ -356,6 +356,8 @@ This tool embodies a specific stance on AI in creative tools:
 
 Part of the [Koher](https://koher.app) collection of design tools.
 
+*Co-created by [Prayas Abhinav](https://prayasabhinav.net) + [Claude Code](https://claude.ai/code)*
+
 Built for game design students and experience creators who want to understand the experiential architecture of their work.
 
 ---

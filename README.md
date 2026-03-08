@@ -42,7 +42,7 @@ This tool is designed to run on your own machine. No server deployment required.
 
 ```bash
 # Clone the repository
-git clone https://github.com/koher-architecture/play-shape-diagnostic.git
+git clone https://github.com/koherarchitecture/play-shape-diagnostic.git
 cd play-shape-diagnostic
 ```
 

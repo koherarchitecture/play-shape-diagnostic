@@ -151,7 +151,7 @@ British English spellings (organise, colour, centre).
 
 ## Git Repository
 
-**Repository:** https://github.com/koher-architecture/playshape
+**Repository:** https://github.com/koherarchitecture/playshape
 
 **Git user configuration:**
 ```bash

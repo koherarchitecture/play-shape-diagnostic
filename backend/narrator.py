@@ -277,8 +277,8 @@ Narrate what this combination means for this specific game."""
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ],
-            temperature=0.7,  # Some creativity, but not too wild
-            max_tokens=800,   # Enough for explanation + implications
+            temperature=0,
+            max_tokens=800,
         )
 
         # Extract the text content

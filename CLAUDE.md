@@ -13,7 +13,7 @@ This tool follows Koher's three-layer architecture:
 | Layer | What It Does | Implementation |
 |-------|-------------|----------------|
 | **Qualification** | AI reads language patterns, extracts signals | Not used in this tool (qualities are pre-defined) |
-| **Rules** | Deterministic code converts signals into judgments | `qualities.py` — embedding similarities + thresholds |
+| **Rules** | Deterministic code converts signals into judgements | `qualities.py` — embedding similarities + thresholds |
 | **Language** | AI narrates decisions already made | `narrator.py` — Claude Haiku via OpenRouter |
 
 **Key insight:** The AI never judges whether a quality combination is "good" or "bad". It only describes the shape that emerges from the relationships.
@@ -180,4 +180,4 @@ This file tracks:
 
 ---
 
-*Open source release — no authentication, no analytics, no usage limits.*
+*Open source release — no authentication, no usage limits. The self-hosted code logs nothing; the hosted demo keeps only an anonymous, aggregate pageview count (no per-person identity, no third-party trackers).*

@@ -180,4 +180,4 @@ This file tracks:
 
 ---
 
-*Open source release — no authentication, no usage limits. The self-hosted code logs nothing; the hosted demo keeps only an anonymous, aggregate pageview count (no per-person identity, no third-party trackers).*
+*Open source release — no authentication, no usage limits. The self-hosted code logs nothing, and nothing counts visitors: Koher runs no analytics anywhere as of 30 July 2026.*

@@ -16,8 +16,8 @@ How relationships are computed:
 4. At runtime, we just look up the score — no API calls needed
 
 Thresholds:
-- synergy_threshold (0.82): Pairs with similarity >= 0.82 reinforce each other
-- tension_threshold (0.72): Pairs with similarity < 0.72 pull against each other
+- synergy_threshold (0.42): Pairs with similarity >= 0.42 reinforce each other
+- tension_threshold (0.15): Pairs with similarity < 0.15 pull against each other
 - Between these: neutral (coexist independently)
 
 These thresholds were calibrated by reviewing the results across all 220 possible
@@ -187,8 +187,8 @@ class QualityAnalyser:
         # Store similarities and thresholds
         self.similarities = data["similarities"]  # Dict: "a+b" -> float
         self.thresholds = data["thresholds"]      # Dict: "synergy" -> float, "tension" -> float
-        self.synergy_threshold = self.thresholds["synergy"]  # e.g., 0.82
-        self.tension_threshold = self.thresholds["tension"]  # e.g., 0.72
+        self.synergy_threshold = self.thresholds["synergy"]  # 0.42, from the JSON
+        self.tension_threshold = self.thresholds["tension"]  # 0.15, from the JSON
 
     def _get_similarity(self, q1: str, q2: str) -> float:
         """

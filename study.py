@@ -338,10 +338,12 @@ The similarity score (0 to 1) tells us how close two qualities are:
     MIDDLE         → neither close nor far → NEUTRAL
 """)
 
-    print_box("""THRESHOLDS (calibrated by reviewing all combinations):
+    with open(Path(__file__).parent / "data" / "quality_similarities.json") as f:
+        rule = json.load(f)["thresholds"]
+    print_box(f"""THRESHOLDS (calibrated by reviewing all combinations):
 
-    Similarity ≥ 0.82  →  SYNERGY
-    Similarity < 0.72  →  TENSION
+    Similarity ≥ {rule['synergy']:.2f}  →  SYNERGY
+    Similarity < {rule['tension']:.2f}  →  TENSION
     Otherwise          →  NEUTRAL""", title="The Rules")
 
     pause()
